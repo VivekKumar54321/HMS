@@ -1,0 +1,112 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+
+}
+
+@{
+
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center">
+	<h1 class="display-4">Welcome</h1>
+	<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<h1>Index</h1>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Index</title>
+	<style type="text/css">
+		body {
+			font-family: Arial;
+			font-size: 10pt;
+		}
+
+		table {
+			border: 1px solid #ccc;
+			border-collapse: collapse;
+		}
+
+			table th {
+				background-color: #F7F7F7;
+				color: #333;
+				font-weight: bold;
+			}
+
+			table th, table td {
+				padding: 5px;
+				border: 1px solid #ccc;
+			}
+	</style>
+</head>
+<body>
+	<form id="myform">
+		<table>
+			<tr>
+				<th colspan="2" align="center">User Details</th>
+			</tr>
+			<tr>
+				<td>UserId: </td>
+				<td>
+					@Html.TextBox("UserId")
+				</td>
+			</tr>
+			<tr>
+				<td>Name: </td>
+				<td>
+					@Html.TextBox("Name")
+				</td>
+			</tr>
+			<tr>
+				<td>Address: </td>
+				<td>
+					@Html.TextBox("Address")
+				</td>
+			</tr>
+			<tr>
+				<td>PhoneNumber: </td>
+				<td>
+					@Html.TextBox("PhoneNumber")
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input id="btnSubmit" type="submit" value="Submit" /></td>
+			</tr>
+		</table>
+	</form>
+	<script type="text/javascript" src="~/js/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(function () {
+			$(document).submit(function () {
+				var form = $("#myform").serialize();
+				var formData = new FormData();
+				formData.append("UserId", $("#UserId").val());
+				formData.append("Name", $("#Name").val());
+				formData.append("Address", $("#Address").val());
+				formData.append("PhoneNumber", $("#PhoneNumber").val());
+				console.log(JSON.stringify(formData))
+				alert(form);
+				$.ajax({
+					type: 'POST',
+					url: "/Home/Index/",
+					data: formData,
+					contentType: false,
+					processData: false,
+				//	dataType: 'json',
+					success: function (data) {
+						if (data.result == "Error") {
+							alert(data.message);
+						}
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>
+

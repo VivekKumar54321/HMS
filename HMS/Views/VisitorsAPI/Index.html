@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title> Index </title>
+</head>
+<body>
+	<form id="Myform">
+		<table>
+			<tr>
+				<th align="Center"> Visitor Details</th>
+			</tr>
+			<tr>
+				<td hidden> VisitorId: </td>
+				<td><input id="VisitorId" type="text" /></td>
+
+			</tr>
+			<tr>
+				<td> VisitorName: </td>
+				<td><input id="VisitorName" type="text" /></td>
+
+			</tr>
+			<tr>
+				<td> VisitorAddress: </td>
+				<td><input id="VisitorAddress" type="text" /></td>
+
+			</tr>
+			<tr>
+				<td> VisitorPhoneNo: </td>
+				<td><input id="VisitorPhoneNo" type="text" /></td>
+
+			</tr>
+			<tr>
+				<td> VisitorEmail: </td>
+				<td> <input id="VisitorEmail" type="text" /></td>
+
+			</tr>
+			<tr>
+				<td><input type="button" id="submit" value="Submit" /></td>
+			</tr>
+		</table>
+	</form >
+			
+	<script type="text/javascript" src="~/js/jquery.min.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$(function () {
+				$.ajax
+					({
+						url: '/api/VisitorsAPI/GetVisitor/',
+						type: 'GET',
+						dataType: 'json',
+						success: function (response) {
+							var trHTML = '';
+							trHTML += '<table>';
+							$.each(response, function (i, item) {
+								trHTML += '<tr><td>' + item.VisitorId + '</td><td>' + item.VisitorName + '</td><td>' + item.VisitorAddress + '</td></tr>' + item.VisitorPhoneNo + '</td></tr>' + item.VisitorEmail + '</td></tr>';
+							});
+							trHTML += '</table>';
+							$('#MyForm').append(trHTML);
+						}
+					});
+			});
+		});
+		</script>
+
+</body>
+</html>

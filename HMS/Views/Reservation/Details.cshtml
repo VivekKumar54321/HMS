@@ -1,0 +1,73 @@
+﻿@model HMS.Models.Reservation
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Reservation</h4>
+    <hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Visitor)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Visitor.VisitorName)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Room.RoomNo)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Room.RoomNo)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.CheckInDate)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.CheckInDate)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.CheckOutDate)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.CheckOutDate)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.RoomBooked)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.RoomBooked)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.GrandTotal)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.GrandTotal)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Billing.BillingType)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Billing.BillingType)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Billing.BillingDate)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Billing.BillingDate)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Billing.BillingAmount)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Billing.BillingAmount)
+		</dd>
+	</dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

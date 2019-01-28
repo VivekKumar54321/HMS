@@ -1,0 +1,72 @@
+﻿@model HMS.Models.MiscellaneousBilling
+
+@{
+	ViewData["Title"] = "Edit";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script language="javascript">
+	$(document).ready(function () {
+		$("#VisitorId").change(function () {
+			var a = $("#FoodRate").val();
+			var b = $("#RoomServiceCharge").val();
+			var c = $("#ServiceTax").val();
+			var d = parseFloat(a) + parseFloat(b) + parseFloat(c);
+
+			$("#TotalAmount").val(d);
+		});
+	});
+</script>
+<h1>Edit</h1>
+
+<h4>MiscellaneousBilling</h4>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Edit">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input type="hidden" asp-for="MiscellaneousBillingId" />
+			<div class="form-group">
+				<label asp-for="Food" class="control-label"></label>
+				<input asp-for="Food" placeholder="Enter the FoodType" class="form-control" />
+				<span asp-validation-for="Food" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="FoodRate" class="control-label"></label>
+				<input asp-for="FoodRate" id="FoodRate" placeholder="Enter the FoodRate" class="form-control" />
+				<span asp-validation-for="FoodRate" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="RoomServiceCharge" class="control-label"></label>
+				<input asp-for="RoomServiceCharge" id="RoomServiceCharge" placeholder="Enter the RoomServiceCharge" class="form-control" />
+				<span asp-validation-for="RoomServiceCharge" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="ServiceTax" class="control-label"></label>
+				<input asp-for="ServiceTax" id="ServiceTax" placeholder="Enter the ServiceTax" class="form-control" />
+				<span asp-validation-for="ServiceTax" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="TotalAmount" class="control-label"></label>
+				<input asp-for="TotalAmount" id="TotalAmount" class="form-control" readonly />
+				<span asp-validation-for="TotalAmount" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="VisitorId" class="control-label"></label>
+				<select asp-for="VisitorId" id="VisitorId" class="form-control" asp-items="@(new SelectList(@ViewBag.Visitors, "VisitorId", "VisitorName"))"></select>
+				<span asp-validation-for="VisitorId" class="text-danger"></span>
+
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Save" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<div>
+	<a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

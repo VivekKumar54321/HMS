@@ -1,0 +1,117 @@
+﻿@{
+
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+	<script type="text/javascript" src="~/js/jquery.min.js"></script>
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+			//alert($(location).attr('href'));
+			{
+				var id = getURLParameter($(location).attr('href'), 'id');
+				
+				UpdateVisitor(id);
+				
+			}
+	
+		});
+
+		function getURLParameter(url, name) {
+			return (RegExp(name + '=' + '(.+?)(&|$)').exec(url) || [, null])[1];
+		}
+
+		function UpdateVisitor(paramId) {
+			
+			$.ajax({
+				type: "GET",
+				url: "/api/VisitorsAPI/GetVisitor",
+				processData: true,
+				dataType: "json",
+				contentType: 'application/json',
+				data: { id: paramId},
+				success: function (response)
+				{
+					VisitorUpdate(response);
+					
+				}
+
+			});
+
+		}
+
+
+		function VisitorUpdate(response)
+		{
+
+
+			var a = $('[name=VisitorName]').val(response.visitorName);
+			var b =$('[name=VisitorAddress]').val(response.visitorAddress);
+			var c =$('[name=VisitorPhoneNo]').val(response.visitorPhoneNo);
+			var d = $('[name=VisitorEmail]').val(response.visitorEmail);
+		
+			var data = {
+
+				VisitorName: a,
+				VisitorAddress: b,
+				VisitorPhoneNo: c,
+				VisitorEmail: d
+
+			};
+			var c = JSON.stringify(data);
+			
+	
+		
+		}
+		function postdata() {
+
+			var a = $('[name=VisitorName]').val();
+			var b = $('[name=VisitorAddress]').val();
+			var c = $('[name=VisitorPhoneNo]').val();
+			var d = $('[name=VisitorEmail]').val();
+
+			var dataToPost = {	VisitorName: a,
+				VisitorAddress: b,
+				VisitorPhoneNo: c,
+				VisitorEmail: d
+
+			};
+
+			var data = JSON.stringify(dataToPost);
+			alert(data);
+
+			$.ajax(
+				{
+					type: "Post",
+					url: "/api/VisitorsAPI/PostVisitor",
+					processData: true,
+					dataType: "json",
+					contentType: 'application/json',
+
+					data: JSON.stringify(dataToPost),
+					success: function () {
+						alert('success');
+					}
+				});
+		}
+
+		</script>
+
+		
+</head>
+
+	<body>
+		<form id="MyForm">
+			<div>
+
+				Visitor Name : <input name="VisitorName" type="text" /><br />
+				Visitor Address : <input name="VisitorAddress" type="text" /><br />
+				Visitor PhoneNo:<input name="VisitorPhoneNo" type="text" /><br />
+				Visitor Email:<input name="VisitorEmail" type="text" /><br />
+
+				<button type="button" value="Submit"  onclick="postdata()"   id="Submit"> Save</button>
+			</div>
+		</form>
+	</body>
+</html>

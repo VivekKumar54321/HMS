@@ -1,0 +1,112 @@
+﻿
+
+@{
+	
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+	<script type="text/javascript" src="~/js/jquery.min.js"></script>
+	<script type="text/javascript">
+
+		$(document).ready(function ()
+		{
+			//getVisitorList();
+			getsearchlist();
+
+			//register 	getsearchlist(); click of the search button
+			
+			$('#Search').click(function ()
+			{
+				getsearchlist();
+				
+			});
+
+		});
+
+
+		function getsearchlist()
+		{
+			// find the value of search
+			var Searchstring = $("[name='Searchstring']").val();
+			var dataToPost = { searchstring: Searchstring };
+			var a = JSON.stringify(dataToPost);
+			alert(a);
+
+			$.ajax
+				({
+					type: 'Post',
+					url: '/api/VisitorsAPI/GetVisitorList',
+					processData: true,
+					dataType: 'json',
+					contentType: 'application/json',
+					data: JSON.stringify(dataToPost),
+					success: function (response)
+					{
+							VisitorsListSuccess(response);
+					}
+				});
+		
+		}
+
+		
+		
+		
+
+		function getVisitorList()
+		{
+			// Call Web API to get a list of Visitors
+			$.ajax
+			({
+				url: '/api/VisitorsAPI/GetVisitorList',
+				type: 'GET',
+					dataType: 'json',
+					
+				success: function (response)
+				{
+					VisitorsListSuccess(response);
+				
+				}
+				
+			});
+		}
+
+		function VisitorsListSuccess(response)
+		{
+			$('#tbody').empty();
+			var trHTML = '';
+			$.each(response, function (i, item)
+			{
+				trHTML += '<tr><td>' + item.visitorId + '</td>' + '<td>' + item.visitorName + '</td>' + ' <td>' + item.visitorAddress + '</td>' + '<td>' + item.visitorPhoneNo + '</td>' + '<td>' + item.visitorEmail + '</td>' + '<td>' +
+					"<a href=/Serve/Edit?id=" + item.visitorId + "> Update" +    "</a>"  + '</td>'  + '</tr>' ;
+			});		
+			$('#tbody').append(trHTML);
+		}
+
+
+	
+	
+	</script>
+</head>
+
+<body>
+	<h1>Search </h1>
+	<form id="MyForm">
+		Search : <input name="Searchstring" type="text" placeholder="Enter the VisitorName" />
+		
+				 <button type="button" value="Search" id="Search"> CLick</button>
+
+		<div id="mytable" class="mytable">
+			<table border='1'>
+				<tr><th>ID</th><th>Name</th><th>Address</th><th>PhoneNo</th><th>Email</th></tr>
+				<tbody id="tbody"></tbody>
+			</table>
+		</div>
+		<a href="~/Serve/Create?id=5">Redirect</a>
+	</form>
+
+</body>
+
+</html>
+
+

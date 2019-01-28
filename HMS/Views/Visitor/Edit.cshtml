@@ -1,0 +1,50 @@
+﻿@model HMS.Models.Visitor
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Visitor</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="VisitorId" />
+            <div class="form-group">
+                <label asp-for="VisitorName" class="control-label"></label>
+                <input asp-for="VisitorName" class="form-control" />
+                <span asp-validation-for="VisitorName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VisitorAddress" class="control-label"></label>
+                <input asp-for="VisitorAddress" class="form-control" />
+                <span asp-validation-for="VisitorAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VisitorPhoneNo" class="control-label"></label>
+                <input asp-for="VisitorPhoneNo" class="form-control" />
+                <span asp-validation-for="VisitorPhoneNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VisitorEmail" class="control-label"></label>
+                <input asp-for="VisitorEmail" class="form-control" />
+                <span asp-validation-for="VisitorEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

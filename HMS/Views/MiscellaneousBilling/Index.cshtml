@@ -1,0 +1,66 @@
+﻿@model IEnumerable<HMS.Models.MiscellaneousBilling>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Food)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomServiceCharge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceTax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Visitor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Food)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomServiceCharge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Visitor.VisitorName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MiscellaneousBillingId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MiscellaneousBillingId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MiscellaneousBillingId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

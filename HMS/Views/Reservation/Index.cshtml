@@ -1,0 +1,84 @@
+﻿@model IEnumerable<HMS.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+		<tr>
+			<th>
+				Visitor Name
+			</th>
+			<th>
+				Room No
+			</th>
+			<th>
+				Check-In-Date
+			</th>
+			<th>
+				Check-Out-Date
+			</th>
+			<th>
+				Room Booked
+			</th>
+			<th>
+				TotalAmount
+			</th>
+			<th>
+				Billing Type
+			</th>
+			<th>
+				Billing Date
+			</th>
+			<th>
+				Billing Amount
+			</th>
+			<th></th>
+		</tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Visitor.VisitorName)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Room.RoomNo)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CheckInDate)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.CheckOutDate)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.RoomBooked)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.GrandTotal)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Billing.BillingType)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Billing.BillingDate)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Billing.BillingAmount)
+			</td>
+			<td>
+				<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+				<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+				<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+			</td>
+		</tr>
+}
+    </tbody>
+</table>
