@@ -19,6 +19,7 @@ namespace HMS.Models
 		public string Bishal { get; set; }
 		public string Vivek { get; set; }
 		public int VivekId { get; set; }
-		
+					public int BishalId { get; set; }
+
 	}
 }
