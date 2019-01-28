@@ -16,7 +16,7 @@ namespace HMS.Models
 		[Required(ErrorMessage = "Enter the  Password")]
 		[MaxLength(50, ErrorMessage = "Too Long Number")]
 		public string Password { get; set; }
-		
+		public string Bishal { get; set; }
 		
 	}
 }
