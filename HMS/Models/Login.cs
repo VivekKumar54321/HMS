@@ -18,9 +18,5 @@ namespace HMS.Models
 		public string Password { get; set; }
 		
 		
-		
-
-	
-
 	}
 }
